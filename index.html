@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisasi Pengeluaran & Anggaran</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Visualisasi Pengeluaran & Anggaran</h1>
+            <button id="theme-toggle" class="btn-theme-toggle" aria-label="Toggle tema">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Total Balance Display -->
+        <section class="total-balance">
+            <h2>Total Pengeluaran</h2>
+            <div id="total-balance" class="balance-amount">Rp 0.00</div>
+        </section>
+
+        <!-- Transaction Form -->
+        <section class="transaction-form-section">
+            <h2>Tambah Transaksi</h2>
+            <form id="transaction-form">
+                <div class="form-group">
+                    <label for="name">Nama Barang</label>
+                    <input type="text" id="name" name="name" placeholder="Masukkan nama barang">
+                    <span id="name-error" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Jumlah (Rp)</label>
+                    <input type="number" id="amount" name="amount" step="0.01" min="0.01" placeholder="Masukkan jumlah">
+                    <span id="amount-error" class="error-message"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Kategori</label>
+                    <select id="category" name="category">
+                        <option value="">Pilih kategori</option>
+                        <option value="Makanan">Makanan</option>
+                        <option value="Transportasi">Transportasi</option>
+                        <option value="Hiburan">Hiburan</option>
+                    </select>
+                    <span id="category-error" class="error-message"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Tambah Transaksi</button>
+            </form>
+        </section>
+
+        <!-- Custom Category Section -->
+        <section class="custom-category-section">
+            <h2>Kategori Khusus</h2>
+            <div class="custom-category-form">
+                <input type="text" id="custom-category-name" placeholder="Nama kategori baru">
+                <input type="color" id="custom-category-color" value="#FF5733">
+                <button id="add-custom-category" class="btn btn-secondary">Tambah Kategori</button>
+            </div>
+            <div id="custom-category-list" class="custom-category-list"></div>
+        </section>
+
+        <!-- Expense Threshold Section -->
+        <section class="threshold-section">
+            <h2>Batas Pengeluaran</h2>
+            <div class="threshold-form">
+                <input type="number" id="threshold-value" step="0.01" min="0" placeholder="Masukkan batas pengeluaran">
+                <button id="set-threshold" class="btn btn-secondary">Atur Batas</button>
+                <button id="clear-threshold" class="btn btn-secondary">Hapus Batas</button>
+            </div>
+        </section>
+
+        <div class="content-grid">
+            <!-- Transaction List -->
+            <section class="transaction-list-section">
+                <div class="section-header">
+                    <h2>Daftar Transaksi</h2>
+                    <div class="sort-controls">
+                        <label for="sort-by">Urutkan:</label>
+                        <select id="sort-by" class="sort-select">
+                            <option value="date-desc">Terbaru</option>
+                            <option value="date-asc">Terlama</option>
+                            <option value="amount-desc">Jumlah Tertinggi</option>
+                            <option value="amount-asc">Jumlah Terendah</option>
+                            <option value="category-asc">Kategori A-Z</option>
+                            <option value="category-desc">Kategori Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="transaction-list" class="transaction-list"></div>
+            </section>
+
+            <!-- Pie Chart -->
+            <section class="chart-section">
+                <h2>Visualisasi Kategori</h2>
+                <div class="chart-container">
+                    <canvas id="expense-chart"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <!-- Monthly Summary Section -->
+        <section class="monthly-summary-section">
+            <h2>Ringkasan Bulanan</h2>
+            <div class="month-selector">
+                <button id="prev-month" class="btn btn-secondary">← Bulan Sebelumnya</button>
+                <span id="current-month-display" class="current-month">-</span>
+                <button id="next-month" class="btn btn-secondary">Bulan Berikutnya →</button>
+            </div>
+            <div id="monthly-summary-content" class="monthly-summary-content">
+                <p class="empty-state">Belum ada data untuk bulan ini</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Application Script -->
+    <script src="js/app.js"></script>
+</body>
+</html>
